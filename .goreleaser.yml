@@ -54,7 +54,7 @@ archives:
       - pgrokd
     name_template: "pgrokd_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     replacements:
-      darwin: Darwin
+      darwin: MacOS
       linux: Linux
       windows: Windows
       386: i386
@@ -67,7 +67,7 @@ archives:
       - pgrok
     name_template: "pgrok_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     replacements:
-      darwin: Darwin
+      darwin: MacOS
       linux: Linux
       windows: Windows
       386: i386
@@ -108,3 +108,27 @@ brews:
       bin.install "pgrokd"
     test: |
       system "#{bin}/pgrokd", "-v"
+scoop:
+  bucket:
+    owner: jerson
+    name: scoop-bucket
+  commit_author:
+    name: Gerson Alexander Pardo Gamez
+    email: jeral17@gmail.com
+  homepage: "https://github.com/jerson/pgrok"
+  description: "Introspected tunnels to localhost a fork from pgrok."
+  license: MIT
+
+nfpms:
+  - id: pgrok
+    homepage: "https://github.com/jerson/pgrok"
+    description: "Introspected tunnels to localhost a fork from pgrok."
+    maintainer: Gerson Alexander Pardo Gamez <jeral17@gmail.com>
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    recommends:
+      - rpm
+    builds:
+      - pgrok

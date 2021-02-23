@@ -46,8 +46,11 @@ type Options struct {
 	subdomain     string
 	command       string
 	inspectaddr   string
+	serveraddr    string
 	inspectpublic bool
 	tls           bool
+	tlsClientCrt  string
+	tlsClientKey  string
 	args          []string
 }
 
@@ -103,6 +106,21 @@ func ParseArgs() (opts *Options, err error) {
 		false,
 		"Use dial for tls port")
 
+	tlsClientCrt := flag.String(
+		"tlsClientCrt",
+		"",
+		"Path to a TLS Client CRT file if server requires")
+
+	tlsClientKey := flag.String(
+		"tlsClientKey",
+		"",
+		"Path to a TLS Client Key file if server requires")
+
+	serveraddr := flag.String(
+		"serveraddr",
+		defaultServerAddr,
+		"The addr for server")
+
 	inspectaddr := flag.String(
 		"inspectaddr",
 		defaultInspectAddr,
@@ -124,9 +142,12 @@ func ParseArgs() (opts *Options, err error) {
 		protocol:      *protocol,
 		authtoken:     *authtoken,
 		hostname:      *hostname,
+		serveraddr:    *serveraddr,
 		inspectaddr:   *inspectaddr,
 		inspectpublic: *inspectpublic,
 		tls:           *tls,
+		tlsClientCrt:  *tlsClientCrt,
+		tlsClientKey:  *tlsClientKey,
 		command:       flag.Arg(0),
 	}
 
